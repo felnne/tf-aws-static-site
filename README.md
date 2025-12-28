@@ -21,7 +21,7 @@ Assign these separately via a suitable policy, such as:
 
 ```hcl
 module "example" {
-  source = "./modules/static-site"
+  source = "git::https://github.com/felnne/tf-aws-static-site.git?ref=v0.2.0"
   # ...
 }
 
