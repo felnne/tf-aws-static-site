@@ -7,11 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.1] 2026-01-08
+
+### Fixed
+
+* Unsupported OPTIONS header in CORS support
+
 ## [0.3.0] 2026-01-08
 
 ### Added
 
-* Optional CORS support
+* Optional CORS support (enabled by default)
 
 ## [0.2.1] 2025-12-28
 
