@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+* CloudFront CORS support
+
 ## [0.3.1] 2026-01-08
 
 ### Fixed

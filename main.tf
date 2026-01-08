@@ -54,19 +54,6 @@ resource "aws_s3_bucket_website_configuration" "this" {
   }
 }
 
-resource "aws_s3_bucket_cors_configuration" "this" {
-  count  = var.cloudfront_enable_cors ? 1 : 0
-  bucket = aws_s3_bucket.this.id
-
-  cors_rule {
-    allowed_headers = ["*"]
-    allowed_methods = ["GET", "HEAD"]
-    allowed_origins = ["*"]
-    expose_headers  = ["ETag"]
-    max_age_seconds = 3000
-  }
-}
-
 resource "aws_acm_certificate" "this" {
   provider          = aws.us-east-1
   domain_name       = var.bucket_name
@@ -131,6 +118,24 @@ resource "aws_cloudfront_response_headers_policy" "this" {
     referrer_policy {
       override        = true
       referrer_policy = "no-referrer-when-downgrade"
+    }
+  }
+
+  dynamic "cors_config" {
+    for_each = var.cloudfront_enable_cors ? [1] : []
+    content {
+      access_control_allow_credentials = false
+      access_control_allow_headers {
+        items = ["*"]
+      }
+      access_control_allow_methods {
+        items = ["GET", "HEAD", "OPTIONS"]
+      }
+      access_control_allow_origins {
+        items = ["*"]
+      }
+      access_control_max_age_sec = 86400
+      origin_override            = true
     }
   }
 
