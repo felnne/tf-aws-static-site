@@ -21,7 +21,7 @@ provider "aws" {
 }
 
 module "example" {
-  source = "git::https://github.com/felnne/tf-aws-static-site.git?ref=v0.2.0"
+  source = "git::https://github.com/felnne/tf-aws-static-site.git?ref=v0.3.2"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
