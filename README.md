@@ -12,6 +12,9 @@ Creates opinionated infrastructure to host a static website in AWS using:
 
 See `examples/default/`.
 
+> [!NOTE]
+> Ensure the created S3 bucket contains a `/404.html` file for use as an error document.
+
 ### Content permissions
 
 > [!NOTE]
