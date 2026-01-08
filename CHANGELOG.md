@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0] 2026-01-08
+
 ### Added
 
 * Optional CORS support
@@ -15,7 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-* setting published source in examples
+* Setting published source in examples
 
 ## [0.2.0] 2025-12-28
 
