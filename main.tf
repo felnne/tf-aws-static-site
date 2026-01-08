@@ -173,23 +173,13 @@ resource "aws_cloudfront_distribution" "this" {
 
   default_cache_behavior {
     target_origin_id           = "S3_${var.bucket_name}"
+    cache_policy_id            = var.cloudfront_enable_default_caching ? "658327ea-f89d-4fab-a63d-7e88639e58f6" : "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" # CachingOptimized or CachingDisabled
+    origin_request_policy_id   = "acba4595-bd28-49b8-b9fe-13317c0390fa"                                                                                  # UserAgentRefererHeaders
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.this.id
     viewer_protocol_policy     = "redirect-to-https"
-    compress                   = true
-    min_ttl                    = 0
-    default_ttl                = var.cloudfront_default_ttl
-    max_ttl                    = 31536000
     allowed_methods            = ["GET", "HEAD", "OPTIONS"]
     cached_methods             = ["GET", "HEAD"]
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.this.id
-
-    forwarded_values {
-      query_string = false
-      headers      = ["Origin"]
-
-      cookies {
-        forward = "none"
-      }
-    }
+    compress                   = true
   }
 
   restrictions {

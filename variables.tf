@@ -19,12 +19,6 @@ variable "cloudfront_comment" {
   type        = string
 }
 
-variable "cloudfront_default_ttl" {
-  description = "Default cache duration for CloudFront distribution content"
-  type        = number
-  default     = 3600
-}
-
 variable "cloudfront_csp" {
   description = "Content Security Policy for CloudFront distribution"
   type        = string
@@ -35,4 +29,10 @@ variable "cloudfront_enable_cors" {
   description = "Enable CORS headers for CloudFront distribution"
   type        = bool
   default     = true
+}
+
+variable "cloudfront_enable_default_caching" {
+  description = "Enable S3 optimised caching for CloudFront distribution content"
+  type        = bool
+  default     = false
 }
