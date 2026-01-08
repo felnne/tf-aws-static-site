@@ -85,3 +85,7 @@ Removes:
 > As of December 2025:
 > - this configuration scores an 'A' rating on the [Security Headers](https://securityheaders.com) website
 > - the *Permissions Policy* header is not set, as there isn't a straightforward 'deny all' option
+
+### CORS
+
+Read-only CORS headers will be enabled by default. Support can be disabled via `cloudfront_enable_cors`.

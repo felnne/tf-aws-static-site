@@ -30,3 +30,9 @@ variable "cloudfront_csp" {
   type        = string
   default     = "default-src 'self';"
 }
+
+variable "cloudfront_enable_cors" {
+  description = "Enable CORS headers for CloudFront distribution"
+  type        = bool
+  default     = true
+}

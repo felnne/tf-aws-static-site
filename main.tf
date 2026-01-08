@@ -54,6 +54,19 @@ resource "aws_s3_bucket_website_configuration" "this" {
   }
 }
 
+resource "aws_s3_bucket_cors_configuration" "this" {
+  count  = var.cloudfront_enable_cors ? 1 : 0
+  bucket = aws_s3_bucket.this.id
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "HEAD", "OPTIONS"]
+    allowed_origins = ["*"]
+    expose_headers  = ["ETag"]
+    max_age_seconds = 3000
+  }
+}
+
 resource "aws_acm_certificate" "this" {
   provider          = aws.us-east-1
   domain_name       = var.bucket_name
