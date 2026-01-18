@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+* Applying tags to CloudFront distribution (not just S3 bucket)
+
 ## [0.3.2] 2026-01-08
 
 ### Fixed

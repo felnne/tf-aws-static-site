@@ -193,6 +193,8 @@ resource "aws_cloudfront_distribution" "this" {
     minimum_protocol_version = "TLSv1.3_2025"
     acm_certificate_arn      = aws_acm_certificate_validation.this.certificate_arn
   }
+
+  tags = var.tags
 }
 
 resource "aws_route53_record" "this" {
