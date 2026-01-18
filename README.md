@@ -91,7 +91,7 @@ Removes:
 
 ### CORS
 
-Read-only CORS headers will be enabled by default. Support can be disabled via `cloudfront_enable_cors`.
+Read-only CORS headers are enabled by default. Support can be disabled via `cloudfront_enable_cors`.
 
 ## Project maintainer
 

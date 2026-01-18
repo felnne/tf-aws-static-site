@@ -13,8 +13,7 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-# Alias for use with resources or data-sources that require the 'us-east-1' region,
-# which is used as a control region by AWS for some services.
+# Alias for resources that require the 'us-east-1' region, which is used as a control region by AWS for some services.
 provider "aws" {
   alias  = "us-east-1"
   region = "us-east-1"
@@ -29,7 +28,7 @@ module "example" {
 
   bucket_name        = "example.com"
   route53_zone_id    = "..."
-  cloudfront_comment = "Example.com"
+  cloudfront_comment = "Example (Production)"
 
   tags = {
     Name         = "example"
