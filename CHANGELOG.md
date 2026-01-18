@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 * `bucket_name` variable changed to `site_name` to be more generic
 
+### Added
+
+* Custom `cache-control` header to reflect caching settings publicly for analysis by tools such as Lighthouse 
+
 ### Fixed
 
 * Applying tags to CloudFront distribution (not just S3 bucket)

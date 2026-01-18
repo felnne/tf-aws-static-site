@@ -144,6 +144,14 @@ resource "aws_cloudfront_response_headers_policy" "this" {
       header = "Server"
     }
   }
+
+  custom_headers_config {
+    items {
+      header   = "Cache-Control"
+      value    = var.cloudfront_enable_default_caching ? "max-age=86400, must-revalidate" : "no-cache, no-store, must-revalidate"
+      override = true
+    }
+  }
 }
 
 resource "aws_cloudfront_distribution" "this" {

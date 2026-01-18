@@ -89,6 +89,20 @@ Removes:
 > - this configuration scores an 'A' rating on the [Security Headers](https://securityheaders.com) website
 > - the *Permissions Policy* header is not set, as there isn't a straightforward 'deny all' option
 
+### Caching
+
+Caching is disabled by default. Support can be enabled via `cloudfront_enable_default_caching`.
+
+- when disabled:
+  - the AWS managed [`CachingDisabled`](https://us-east-1.console.aws.amazon.com/cloudfront/v4/home?region=eu-west-1#/policies/cache/4135ea2d-6df8-44a3-9df3-4b5a84be39ad) caching policy is used
+  - a [`cache-control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control) header is added to responses with a value of `no-cache, no-store, must-revalidate`
+    - added to disable browser level caching where content is expected to change (such as on testing sites)
+- when enabled:
+  - the AWS managed [`CachingOptimized`](https://us-east-1.console.aws.amazon.com/cloudfront/v4/home?region=eu-west-1#/policies/cache/658327ea-f89d-4fab-a63d-7e88639e58f6) caching policy is used
+    - this sets a maximum cache TTL of 1 year, and default TTL of 1 day
+  - a [`cache-control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control) header is added to responses with a value of `max-age=86400, must-revalidate`, to match the default TTL
+    - added to enable browser level caching and to inform performance analysis tools such as Lighthouse
+
 ### CORS
 
 Read-only CORS headers are enabled by default. Support can be disabled via `cloudfront_enable_cors`.
