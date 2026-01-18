@@ -26,7 +26,7 @@ module "example" {
     aws.us-east-1 = aws.us-east-1
   }
 
-  bucket_name        = "example.com"
+  site_name        = "example.com"
   route53_zone_id    = "..."
   cloudfront_comment = "Example (Production)"
 

@@ -4,7 +4,7 @@ resource "random_password" "referer_secret" {
 }
 
 resource "aws_s3_bucket" "this" {
-  bucket = var.bucket_name
+  bucket = var.site_name
   tags   = var.tags
 }
 
@@ -56,7 +56,7 @@ resource "aws_s3_bucket_website_configuration" "this" {
 
 resource "aws_acm_certificate" "this" {
   provider          = aws.us-east-1
-  domain_name       = var.bucket_name
+  domain_name       = var.site_name
   validation_method = "DNS"
 
   lifecycle {
@@ -91,7 +91,7 @@ resource "aws_acm_certificate_validation" "this" {
 }
 
 resource "aws_cloudfront_response_headers_policy" "this" {
-  name = "${replace(var.bucket_name, ".", "_")}_headers"
+  name = "${replace(var.site_name, ".", "_")}_headers"
 
   security_headers_config {
     strict_transport_security {
@@ -152,12 +152,11 @@ resource "aws_cloudfront_distribution" "this" {
   http_version        = "http2and3"
   default_root_object = "index.html"
   price_class         = "PriceClass_100"
-  aliases             = [var.bucket_name]
+  aliases             = [var.site_name]
 
   origin {
     domain_name = aws_s3_bucket_website_configuration.this.website_endpoint
-    origin_id   = "S3_${var.bucket_name}"
-
+    origin_id   = "S3_${var.site_name}"
     custom_origin_config {
       http_port              = 80
       https_port             = 443 # required though not used due to origin_protocol_policy
@@ -172,7 +171,7 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   default_cache_behavior {
-    target_origin_id           = "S3_${var.bucket_name}"
+    target_origin_id           = "S3_${var.site_name}"
     cache_policy_id            = var.cloudfront_enable_default_caching ? "658327ea-f89d-4fab-a63d-7e88639e58f6" : "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" # CachingOptimized or CachingDisabled
     origin_request_policy_id   = "acba4595-bd28-49b8-b9fe-13317c0390fa"                                                                                  # UserAgentRefererHeaders
     response_headers_policy_id = aws_cloudfront_response_headers_policy.this.id
@@ -199,7 +198,7 @@ resource "aws_cloudfront_distribution" "this" {
 
 resource "aws_route53_record" "this" {
   zone_id = var.route53_zone_id
-  name    = split(".", var.bucket_name)[0]
+  name    = split(".", var.site_name)[0]
   type    = "CNAME"
   ttl     = 300
   records = [aws_cloudfront_distribution.this.domain_name]

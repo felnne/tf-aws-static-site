@@ -4,13 +4,13 @@ variable "tags" {
   default     = {}
 }
 
-variable "bucket_name" {
-  description = "Name of the S3 bucket in the form of a domain name"
+variable "site_name" {
+  description = "Name of the S3 bucket and CloudFront distribution in the form of a domain name"
   type        = string
 }
 
 variable "route53_zone_id" {
-  description = "Route53 zone ID corresponding to the domain in bucket_name"
+  description = "Route53 zone ID corresponding to the domain in site_name"
   type        = string
 }
 
