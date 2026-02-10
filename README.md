@@ -70,6 +70,12 @@ A [referrer based secret](https://repost.aws/knowledge-center/cloudfront-serve-s
 
 Supports HTTP/1/2/3.
 
+### HTTPS protocol
+
+Default CloudFront viewer certificate minimum protocol version: *TLSv1.3_2025*.
+
+Can be changed to a supported [Security Policy](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html) via the `cloudfront_min_proto_version` variable.
+
 ### Security headers
 
 Adds:

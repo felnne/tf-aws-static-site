@@ -19,6 +19,13 @@ variable "cloudfront_comment" {
   type        = string
 }
 
+variable "cloudfront_min_proto_version" {
+  description = "Minimum protocol version for CloudFront viewer certificate (i.e. min-TLS / HTTPS version)"
+  type        = bool
+  default     = "TLSv1.3_2025"
+}
+
+
 variable "cloudfront_csp" {
   description = "Content Security Policy for CloudFront distribution"
   type        = string
