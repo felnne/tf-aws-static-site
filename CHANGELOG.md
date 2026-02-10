@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.5.0] 2026-02-10
+
 ### Added
 
 * Variable for controlling the CloudFront viewer certificate minimum protocol version (`cloudfront_min_proto_version`)

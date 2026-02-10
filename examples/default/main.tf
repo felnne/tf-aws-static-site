@@ -20,13 +20,13 @@ provider "aws" {
 }
 
 module "example" {
-  source = "git::https://github.com/felnne/tf-aws-static-site.git?ref=v0.4.0"
+  source = "git::https://github.com/felnne/tf-aws-static-site.git?ref=v0.5.0"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
   }
 
-  site_name        = "example.com"
+  site_name          = "example.com"
   route53_zone_id    = "..."
   cloudfront_comment = "Example (Production)"
 
