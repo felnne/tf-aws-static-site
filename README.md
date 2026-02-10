@@ -10,7 +10,7 @@ Creates opinionated infrastructure to host a static website in AWS using:
 
 ## Usage
 
-See `examples/default/`.
+See `examples/default/`, or `examples/bas` if using a BAS domain and needing compatibility with the BAS load balancer.
 
 > [!NOTE]
 > Ensure the created S3 bucket contains a `/404.html` file for use as an error document.

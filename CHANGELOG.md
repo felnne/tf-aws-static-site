@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 * Variable for controlling the CloudFront viewer certificate minimum protocol version (`cloudfront_min_proto_version`)
+* Example for BAS specific integration (core domains for DSN zone and required TLS version support)
 
 ## [0.4.0] 2026-01-18
 
