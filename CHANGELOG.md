@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.5.1] 2026-02-10
+
+### Fixed
+
+* `cloudfront_min_proto_version` variable type (was boolean should have been string)
+
 ## [0.5.0] 2026-02-10
 
 ### Added

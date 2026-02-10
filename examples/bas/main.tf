@@ -31,7 +31,7 @@ data "terraform_remote_state" "BAS-CORE-DOMAINS" {
 }
 
 module "example" {
-  source = "git::https://github.com/felnne/tf-aws-static-site.git?ref=v0.5.0"
+  source = "git::https://github.com/felnne/tf-aws-static-site.git?ref=v0.5.1"
 
   providers = {
     aws.us-east-1 = aws.us-east-1
