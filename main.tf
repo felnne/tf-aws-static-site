@@ -48,7 +48,6 @@ resource "aws_s3_bucket_website_configuration" "this" {
   index_document {
     suffix = "index.html"
   }
-
   error_document {
     key = "404.html"
   }
@@ -70,22 +69,21 @@ resource "aws_route53_record" "acm" {
   for_each = {
     for dvo in aws_acm_certificate.this.domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
-      record = dvo.resource_record_value
       type   = dvo.resource_record_type
+      record = dvo.resource_record_value
     }
   }
 
-  allow_overwrite = true
-  name            = each.value.name
-  records         = [each.value.record]
-  ttl             = 60
-  type            = each.value.type
   zone_id         = var.route53_zone_id
+  name            = each.value.name
+  type            = each.value.type
+  ttl             = 60
+  allow_overwrite = true
+  records         = [each.value.record]
 }
 
 resource "aws_acm_certificate_validation" "this" {
-  provider = aws.us-east-1
-
+  provider                = aws.us-east-1
   certificate_arn         = aws_acm_certificate.this.arn
   validation_record_fqdns = [for record in aws_route53_record.acm : record.fqdn]
 }
@@ -161,6 +159,7 @@ resource "aws_cloudfront_distribution" "this" {
   default_root_object = "index.html"
   price_class         = "PriceClass_100"
   aliases             = [var.site_name]
+  tags                = var.tags
 
   origin {
     domain_name = aws_s3_bucket_website_configuration.this.website_endpoint
@@ -200,8 +199,6 @@ resource "aws_cloudfront_distribution" "this" {
     minimum_protocol_version = var.cloudfront_min_proto_version
     acm_certificate_arn      = aws_acm_certificate_validation.this.certificate_arn
   }
-
-  tags = var.tags
 }
 
 resource "aws_route53_record" "this" {
