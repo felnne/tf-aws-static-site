@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+* Using a `aws_iam_policy_document` data block to set S3 bucket policy
 * Minor formatting changes
 
 ## [0.5.1] 2026-02-10

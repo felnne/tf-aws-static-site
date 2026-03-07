@@ -17,29 +17,32 @@ resource "aws_s3_bucket_public_access_block" "this" {
   restrict_public_buckets = false
 }
 
+data "aws_iam_policy_document" "this" {
+  statement {
+    sid    = "CloudFrontOriginAccess"
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+    actions   = ["s3:GetObject"]
+    resources = ["${aws_s3_bucket.this.arn}/*"]
+    condition {
+      test     = "StringEquals"
+      variable = "aws:Referer"
+      values   = [random_password.referer_secret.result]
+    }
+  }
+}
+
 resource "aws_s3_bucket_policy" "this" {
   bucket = aws_s3_bucket.this.bucket
+  policy = data.aws_iam_policy_document.this.json
 
   depends_on = [
     aws_s3_bucket_public_access_block.this
   ]
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.this.arn}/*"
-        Condition = {
-          StringEquals = {
-            "aws:Referer" = random_password.referer_secret.result
-          }
-        }
-      }
-    ]
-  })
 }
 
 resource "aws_s3_bucket_website_configuration" "this" {
