@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+* Output for CloudFront distribution ID
+
 ### Changed
 
 * Using a `aws_iam_policy_document` data block to set S3 bucket policy
