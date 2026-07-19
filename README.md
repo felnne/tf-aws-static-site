@@ -106,8 +106,13 @@ Caching is disabled by default. Support can be enabled via `cloudfront_enable_de
 - when enabled:
   - the AWS managed [`CachingOptimized`](https://us-east-1.console.aws.amazon.com/cloudfront/v4/home?region=eu-west-1#/policies/cache/658327ea-f89d-4fab-a63d-7e88639e58f6) caching policy is used
     - this sets a maximum cache TTL of 1 year, and default TTL of 1 day
-  - a [`cache-control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control) header is added to responses with a value of `max-age=86400, must-revalidate`, to match the default TTL
-    - added to enable browser level caching and to inform performance analysis tools such as Lighthouse
+
+> [!Note]
+> Earlier module versions included a [`cache-control`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control) 
+> header when caching was enabled, with a value of `max-age=86400, must-revalidate`, to inform performance analysis 
+> tools such as Lighthouse. However, this blanket approach prevents 
+> [Object Level](https://repost.aws/knowledge-center/prevent-cloudfront-from-caching-files) cache exemption and so was 
+> removed.
 
 ### CORS
 
